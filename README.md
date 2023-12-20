@@ -1,0 +1,1 @@
+# WPFStampante
