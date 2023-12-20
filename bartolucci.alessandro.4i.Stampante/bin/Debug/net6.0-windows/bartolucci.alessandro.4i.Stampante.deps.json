@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "bartolucci.alessandro.4i.Stampante/1.0.0": {
+        "runtime": {
+          "bartolucci.alessandro.4i.Stampante.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "bartolucci.alessandro.4i.Stampante/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
