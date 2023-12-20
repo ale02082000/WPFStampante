@@ -15,24 +15,26 @@ namespace bartolucci.alessandro._4i.Stampante1
 
             try
             {
-                StreamReader rd = new StreamReader("C:\\Users\\studente.ITTSBELLUZZIDAV\\Desktop\\bartolucci.alessandro.4i.Stampante\\Models\\persistente.csv");
-                string r = rd.ReadLine();
-
-                if (r != null && r.Split(';').Length >= 5)
+                using (StreamReader rd = new StreamReader("C:\\Users\\ALE\\OneDrive\\Desktop\\bartolucci.alessandro.4i.Stampante\\Models\\persistente.csv"))
                 {
-                    int.TryParse(r.Split(';')[0], out int ciano);
-                    int.TryParse(r.Split(';')[1], out int magenta);
-                    int.TryParse(r.Split(';')[2], out int giallo);
-                    int.TryParse(r.Split(';')[3], out int nero);
-                    int.TryParse(r.Split(';')[4], out int fogli);
+                    string r = rd.ReadLine();
 
-                    stampante.C = ciano <= 0 ? 100 : ciano;
-                    stampante.M = magenta;
-                    stampante.Y = giallo;
-                    stampante.B = nero;
-                    stampante.Fogli = fogli;
+                    if (r != null && r.Split(';').Length >= 5)
+                    {
+                        int.TryParse(r.Split(';')[0], out int ciano);
+                        int.TryParse(r.Split(';')[1], out int magenta);
+                        int.TryParse(r.Split(';')[2], out int giallo);
+                        int.TryParse(r.Split(';')[3], out int nero);
+                        int.TryParse(r.Split(';')[4], out int fogli);
 
-                    AggiornaUI();
+                        stampante.C = ciano <= 0 ? 100 : ciano;
+                        stampante.M = magenta;
+                        stampante.Y = giallo;
+                        stampante.B = nero;
+                        stampante.Fogli = fogli;
+
+                        AggiornaUI();
+                    }
                 }
             }
             catch (Exception ex)
@@ -69,6 +71,8 @@ namespace bartolucci.alessandro._4i.Stampante1
             {
                 AggiornaUI();
             }
+
+            SalvaSuFile();
         }
 
         private void RiempiSerbatoiButtonClick(object sender, RoutedEventArgs e)
@@ -80,6 +84,8 @@ namespace bartolucci.alessandro._4i.Stampante1
 
             risultatoTextBlock.Text = "Tutti i serbatoi sono stati riempiti.";
             AggiornaUI();
+
+            SalvaSuFile();
         }
 
         private void AggiungiCartaButtonClick(object sender, RoutedEventArgs e)
@@ -103,6 +109,8 @@ namespace bartolucci.alessandro._4i.Stampante1
             {
                 MessageBox.Show("Inserisci un numero valido.", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
+            SalvaSuFile();
         }
 
         private void CaricaCianoButtonClick(object sender, RoutedEventArgs e)
@@ -110,6 +118,7 @@ namespace bartolucci.alessandro._4i.Stampante1
             stampante.SostituisciColore(Models.Stampante.Colore.C);
             risultatoTextBlock.Text = "Il serbatoio di inchiostro ciano è stato caricato.";
             contatoreCianoTextBlock.Text = "100%";
+            SalvaSuFile();
         }
 
         private void CaricaMagentaButtonClick(object sender, RoutedEventArgs e)
@@ -117,6 +126,7 @@ namespace bartolucci.alessandro._4i.Stampante1
             stampante.SostituisciColore(Models.Stampante.Colore.M);
             risultatoTextBlock.Text = "Il serbatoio di inchiostro magenta è stato caricato.";
             contatoreMagentaTextBlock.Text = "100%";
+            SalvaSuFile();
         }
 
         private void CaricaGialloButtonClick(object sender, RoutedEventArgs e)
@@ -124,6 +134,7 @@ namespace bartolucci.alessandro._4i.Stampante1
             stampante.SostituisciColore(Models.Stampante.Colore.Y);
             risultatoTextBlock.Text = "Il serbatoio di inchiostro giallo è stato caricato.";
             contatoreGialloTextBlock.Text = "100%";
+            SalvaSuFile();
         }
 
         private void CaricaNeroButtonClick(object sender, RoutedEventArgs e)
@@ -131,6 +142,23 @@ namespace bartolucci.alessandro._4i.Stampante1
             stampante.SostituisciColore(Models.Stampante.Colore.B);
             risultatoTextBlock.Text = "Il serbatoio di inchiostro nero è stato caricato.";
             contatoreNeroTextBlock.Text = "100%";
+            SalvaSuFile();
+        }
+
+        private void SalvaSuFile()
+        {
+            try
+            {
+                using (StreamWriter wr = new StreamWriter("C:\\Users\\ALE\\OneDrive\\Desktop\\bartolucci.alessandro.4i.Stampante\\Models\\persistente.csv", false))
+                {
+                    wr.WriteLine($"{stampante.C};{stampante.M};{stampante.Y};{stampante.B};{stampante.Fogli}");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Errore durante il salvataggio su file: " + ex.Message);
+            }
         }
     }
 }
+
