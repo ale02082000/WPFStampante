@@ -7,7 +7,8 @@
 ***
 
 
-<img src="https://github.com/ale02082000/WPFStampante/assets/127590077/63d26051-a51a-4c79-9f8c-04620188189b">
+<img src="https://github.com/ale02082000/WPFStampante/assets/127590077/aa35f838-b912-4abd-8377-f8550904f774">
+
 
 
 
